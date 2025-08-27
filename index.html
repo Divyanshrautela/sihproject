@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>SmartAgri — Register</title>
+  <link rel="stylesheet" href="styles.css">
+  <script defer src="script.js"></script>
+</head>
+<body class="bg">
+
+<div class="center-card" id="reg-card" role="form" aria-labelledby="reg-title">
+  <h1 id="reg-title" class="big">📱 Register</h1>
+
+  <label class="large-label">Mobile number</label>
+  <input id="mobile" class="large-input" type="tel" placeholder="Enter 10-digit mobile" inputmode="numeric" />
+
+  <button type="button" class="primary-large" id="sendOtpBtn">Get OTP</button>
+
+  <div id="otp-block" style="display:none; margin-top:12px;">
+    <label class="large-label">Enter OTP</label>
+    <input id="otp" class="large-input" type="text" placeholder="Enter OTP (demo: 1234)" />
+    <button type="button" class="primary-large" id="verifyOtpBtn">Verify & Continue</button>
+  </div>
+
+  <p class="note small-note">Demo OTP = <strong>1234</strong> (replace with real SMS in production)</p>
+  <p class="back-link"><a href="index.html">← Change Language</a></p>
+</div>
+
+<div id="leafContainer" aria-hidden="true"></div>
+
+<script>
+  // OTP flow working on mobile touch & desktop
+  document.addEventListener('DOMContentLoaded', function(){
+    const sendBtn = document.getElementById('sendOtpBtn');
+    const verifyBtn = document.getElementById('verifyOtpBtn');
+
+    sendBtn.addEventListener('click', function(){
+      const m = document.getElementById('mobile').value || '';
+      if (!/^\d{10}$/.test(m)) {
+        alert('Please enter a valid 10-digit mobile number');
+        return;
+      }
+      document.getElementById('otp-block').style.display = 'block';
+      alert('Demo OTP sent: 1234');
+    });
+
+    verifyBtn.addEventListener('click', function(){
+      const otp = document.getElementById('otp').value || '';
+      if (otp.trim() === '1234') {
+        window.location.href = 'home.html';
+      } else {
+        alert('Wrong OTP (demo). Use 1234');
+      }
+    });
+  });
+</script>
+
+</body>
+</html>

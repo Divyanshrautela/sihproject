@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Government Schemes - SmartAgri</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    
+    body {
+      background: linear-gradient(to bottom, #e8f5e9, #c8e6c9, #a5d6a7);
+      color: #2e7d32;
+      min-height: 100vh;
+      padding: 20px;
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 20px;
+      background-color: rgba(255, 255, 255, 0.9);
+      border-radius: 10px;
+      margin-bottom: 30px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+    
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+      color: #2e7d32;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .top-actions {
+      display: flex;
+      gap: 10px;
+    }
+    
+    .icon-btn {
+      background: rgba(46, 125, 50, 0.1);
+      border: none;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      font-size: 18px;
+      cursor: pointer;
+      color: #2e7d32;
+      transition: all 0.3s;
+    }
+    
+    .icon-btn:hover {
+      background: rgba(46, 125, 50, 0.2);
+      transform: scale(1.05);
+    }
+    
+    .page-title {
+      text-align: center;
+      margin-bottom: 10px;
+      font-size: 32px;
+      color: #1b5e20;
+    }
+    
+    .subtitle {
+      text-align: center;
+      margin-bottom: 40px;
+      color: #388e3c;
+      font-size: 18px;
+    }
+    
+    .search-box {
+      display: flex;
+      max-width: 600px;
+      margin: 0 auto 40px;
+    }
+    
+    .search-box input {
+      flex: 1;
+      padding: 15px 20px;
+      border: 2px solid #4caf50;
+      border-radius: 10px 0 0 10px;
+      font-size: 16px;
+      outline: none;
+    }
+    
+    .search-box button {
+      padding: 15px 25px;
+      background: #4caf50;
+      color: white;
+      border: none;
+      border-radius: 0 10px 10px 0;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    
+    .categories {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 15px;
+      margin-bottom: 40px;
+    }
+    
+    .category-btn {
+      padding: 12px 25px;
+      background: rgba(255, 255, 255, 0.9);
+      border: 2px solid #66bb6a;
+      border-radius: 30px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.3s;
+    }
+    
+    .category-btn:hover, .category-btn.active {
+      background: #4caf50;
+      color: white;
+    }
+    
+    .schemes-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: 25px;
+    }
+    
+    .scheme-card {
+      background: white;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s;
+    }
+    
+    .scheme-card:hover {
+      transform: translateY(-5px);
+    }
+    
+    .card-header {
+      padding: 20px;
+      background: #4caf50;
+      color: white;
+    }
+    
+    .card-body {
+      padding: 20px;
+    }
+    
+    .card-body p {
+      margin-bottom: 15px;
+      line-height: 1.6;
+      color: #555;
+    }
+    
+    .card-footer {
+      padding: 15px 20px;
+      background: #f1f8e9;
+      display: flex;
+      justify-content: space-between;
+    }
+    
+    .apply-btn {
+      padding: 8px 20px;
+      background: #4caf50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+      text-decoration: none;
+      display: inline-block;
+    }
+    
+    .apply-btn:hover {
+      background: #388e3c;
+    }
+    
+    .info-btn {
+      padding: 8px 15px;
+      background: #e8f5e9;
+      color: #2e7d32;
+      border: 1px solid #4caf50;
+      border-radius: 5px;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+    }
+    
+    .info-btn:hover {
+      background: #c8e6c9;
+    }
+    
+    .notification {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      padding: 15px 25px;
+      background: #4caf50;
+      color: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      display: none;
+    }
+    
+    @media (max-width: 768px) {
+      .schemes-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .categories {
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      .category-btn {
+        width: 80%;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="logo">
+        <i class="fas fa-leaf"></i>
+        <span>SmartAgri</span>
+        <div id="google_translate_element"></div> 
+
+<!-- to your js part -->
+<script src="script.js"></script>
+      <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement(
+                {pageLanguage: 'en'},
+                'google_translate_element'
+            );
+        } 
+  </script>
+  <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+      </div>
+      <div class="top-actions">
+        <button class="icon-btn" onclick="goHome()">
+          <i class="fas fa-home"></i>
+        </button>
+        <button class="icon-btn" onclick="toggleNotification()">
+          <i class="fas fa-bell"></i>
+        </button>
+      </div>
+    </header>
+
+    <h1 class="page-title">Government Schemes for Farmers</h1>
+    <p class="subtitle">Explore various government initiatives to support agricultural growth</p>
+
+    <div class="search-box">
+      <input type="text" placeholder="Search for schemes..." id="searchInput">
+      <button onclick="searchSchemes()">
+        <i class="fas fa-search"></i>
+      </button>
+    </div>
+
+    <div class="categories">
+      <button class="category-btn active" onclick="filterSchemes('all')">All Schemes</button>
+      <button class="category-btn" onclick="filterSchemes('financial')">Financial Support</button>
+      <button class="category-btn" onclick="filterSchemes('insurance')">Crop Insurance</button>
+      <button class="category-btn" onclick="filterSchemes('infrastructure')">Infrastructure</button>
+      <button class="category-btn" onclick="filterSchemes('education')">Education & Training</button>
+    </div>
+
+    <div class="schemes-grid" id="schemesContainer">
+      <!-- Scheme 1 -->
+      <div class="scheme-card" data-category="financial">
+        <div class="card-header">
+          <h2>PM-KISAN</h2>
+        </div>
+        <div class="card-body">
+          <p>Pradhan Mantri Kisan Samman Nidhi provides income support of ₹6,000 per year to all landholding farmer families in three equal installments.</p>
+          <p><strong>Eligibility:</strong> Small and marginal landholder farmer families</p>
+        </div>
+        <div class="card-footer">
+          <a href="https://pmkisan.gov.in" target="_blank" class="apply-btn">Apply Now</a>
+          <a href="https://pmkisan.gov.in/Documents/PMKISAN_English.pdf" target="_blank" class="info-btn">More Info</a>
+        </div>
+      </div>
+
+      <!-- Scheme 2 -->
+      <div class="scheme-card" data-category="insurance">
+        <div class="card-header">
+          <h2>PMFBY</h2>
+        </div>
+        <div class="card-body">
+          <p>Pradhan Mantri Fasal Bima Yojana provides comprehensive crop insurance from pre-sowing to post-harvest against non-preventable natural risks.</p>
+          <p><strong>Premium:</strong> 2% for Kharif, 1.5% for Rabi crops</p>
+        </div>
+        <div class="card-footer">
+          <a href="https://pmfby.gov.in" target="_blank" class="apply-btn">Apply Now</a>
+          <a href="https://pmfby.gov.in/pdf/operational-guidelines/PMFBYEnglish.pdf" target="_blank" class="info-btn">More Info</a>
+        </div>
+      </div>
+
+      <!-- Scheme 3 -->
+      <div class="scheme-card" data-category="infrastructure">
+        <div class="card-header">
+          <h2>PKVY</h2>
+        </div>
+        <div class="card-body">
+          <p>Paramparagat Krishi Vikas Yojana promotes organic farming through cluster approach with 50 farmers having 50 acre land.</p>
+          <p><strong>Assistance:</strong> ₹50,000 per hectare/3 years</p>
+        </div>
+        <div class="card-footer">
+          <a href="https://pgsindia-ncof.gov.in/PKVY/index.aspx" target="_blank" class="apply-btn">Apply Now</a>
+          <a href="https://pgsindia-ncof.gov.in/PKVY/PKVY_Guidelines.pdf" target="_blank" class="info-btn">More Info</a>
+        </div>
+      </div>
+
+      <!-- Scheme 4 -->
+      <div class="scheme-card" data-category="financial">
+        <div class="card-header">
+          <h2>KCC</h2>
+        </div>
+        <div class="card-body">
+          <p>Kisan Credit Card provides farmers with timely access to credit for agricultural and allied activities.</p>
+          <p><strong>Features:</strong> Credit up to ₹3 lakh at 4% interest per annum</p>
+        </div>
+        <div class="card-footer">
+          <a href="https://www.agriculture.gov.in/credit-and-insurance/kisan-credit-card" target="_blank" class="apply-btn">Apply Now</a>
+          <a href="https://www.nabard.org/auth/writereaddata/tender/1608632947KCC%20Scheme-Eng.pdf" target="_blank" class="info-btn">More Info</a>
+        </div>
+      </div>
+
+      <!-- Scheme 5 -->
+      <div class="scheme-card" data-category="education">
+        <div class="card-header">
+          <h2>ATMA</h2>
+        </div>
+        <div class="card-body">
+          <p>Agricultural Technology Management Agency aims to make extension system farmer-driven and farmer-accountable.</p>
+          <p><strong>Focus:</strong> Dissemination of agricultural technology</p>
+        </div>
+        <div class="card-footer">
+          <a href="https://www.manage.gov.in/atma/" target="_blank" class="apply-btn">Apply Now</a>
+          <a href="https://www.manage.gov.in/atma/Guidelines.pdf" target="_blank" class="info-btn">More Info</a>
+        </div>
+      </div>
+
+      <!-- Scheme 6 -->
+      <div class="scheme-card" data-category="infrastructure">
+        <div class="card-header">
+          <h2>PMKSY</h2>
+        </div>
+        <div class="card-body">
+          <p>Pradhan Mantri Krishi Sinchayee Yojana aims to expand irrigation coverage and improve water use efficiency.</p>
+          <p><strong>Objective:</strong> "Har Khet Ko Paani" (Water to Every Field)</p>
+        </div>
+        <div class="card-footer">
+          <a href="https://pmksy.gov.in" target="_blank" class="apply-btn">Apply Now</a>
+          <a href="https://pmksy.gov.in/Documents/PMKSY_Guidelines.pdf" target="_blank" class="info-btn">More Info</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="notification" id="notification">
+      <i class="fas fa-info-circle"></i>
+      <span id="notificationText">Scheme information loaded successfully!</span>
+    </div>
+  </div>
+
+  <script>
+    function goHome() {
+      window.location.href = 'home.html';
+    }
+    
+    function toggleNotification() {
+      const notification = document.getElementById('notification');
+      notification.style.display = 'block';
+      setTimeout(() => {
+        notification.style.display = 'none';
+      }, 3000);
+    }
+    
+    function filterSchemes(category) {
+      const schemeCards = document.querySelectorAll('.scheme-card');
+      const categoryBtns = document.querySelectorAll('.category-btn');
+      
+      // Update active button
+      categoryBtns.forEach(btn => btn.classList.remove('active'));
+      event.target.classList.add('active');
+      
+      // Filter schemes
+      schemeCards.forEach(card => {
+        if (category === 'all' || card.dataset.category === category) {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+      
+      // Show notification
+      document.getElementById('notificationText').textContent = `Showing ${category} schemes`;
+      toggleNotification();
+    }
+    
+    function searchSchemes() {
+      const searchText = document.getElementById('searchInput').value.toLowerCase();
+      const schemeCards = document.querySelectorAll('.scheme-card');
+      
+      schemeCards.forEach(card => {
+        const cardText = card.textContent.toLowerCase();
+        if (cardText.includes(searchText)) {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+      
+      // Show notification
+      document.getElementById('notificationText').textContent = `Search results for "${searchText}"`;
+      toggleNotification();
+    }
+  </script>
+</body>
+</html>

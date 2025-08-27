@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Feedback & Contact - SmartAgri</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #2e382e;
+      line-height: 1.6;
+      background: linear-gradient(to bottom, #e8f5e9, #a5d6a7);
+      min-height: 100vh;
+      padding: 20px;
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 20px;
+      background-color: rgba(255, 255, 255, 0.9);
+      border-radius: 10px;
+      margin-bottom: 30px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+    
+    .logo {
+      font-size: 24px;
+      font-weight: 700;
+      color: #2e7d32;
+    }
+    
+    .nav-buttons {
+      display: flex;
+      gap: 10px;
+    }
+    
+    .icon-btn {
+      background: rgba(46, 125, 50, 0.1);
+      border: none;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      font-size: 18px;
+      cursor: pointer;
+      color: #2e7d32;
+      transition: all 0.3s;
+    }
+    
+    .icon-btn:hover {
+      background: rgba(46, 125, 50, 0.2);
+      transform: scale(1.05);
+    }
+    
+    h1 {
+      text-align: center;
+      margin-bottom: 10px;
+      color: #1b5e20;
+    }
+    
+    .subtitle {
+      text-align: center;
+      margin-bottom: 40px;
+      color: #388e3c;
+    }
+    
+    /* Feedback section */
+    .feedback-section {
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 15px;
+      padding: 25px;
+      margin-bottom: 30px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+    
+    .section-title {
+      text-align: center;
+      margin-bottom: 25px;
+      color: #2e7d32;
+    }
+    
+    .form-group {
+      margin-bottom: 20px;
+    }
+    
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: #2e7d32;
+    }
+    
+    .form-group input, 
+    .form-group textarea, 
+    .form-group select {
+      width: 100%;
+      padding: 12px 15px;
+      border: 2px solid #c8e6c9;
+      border-radius: 8px;
+      font-size: 16px;
+      background: white;
+    }
+    
+    .form-group input:focus, 
+    .form-group textarea:focus, 
+    .form-group select:focus {
+      border-color: #4caf50;
+      outline: none;
+    }
+    
+    /* Star rating */
+    .star-rating {
+      display: flex;
+      justify-content: center;
+      margin: 20px 0;
+    }
+    
+    .star {
+      font-size: 32px;
+      color: #ddd;
+      cursor: pointer;
+      transition: color 0.2s;
+      margin: 0 5px;
+    }
+    
+    .star:hover,
+    .star.active {
+      color: #ffc107;
+    }
+    
+    .rating-text {
+      text-align: center;
+      margin-top: 10px;
+      font-weight: 600;
+      color: #2e7d32;
+    }
+    
+    /* Submit button */
+    .submit-btn {
+      width: 100%;
+      padding: 15px;
+      background: #4caf50;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 18px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.3s;
+      margin-top: 20px;
+    }
+    
+    .submit-btn:hover {
+      background: #388e3c;
+    }
+    
+    /* Contact expert section */
+    .contact-section {
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 15px;
+      padding: 25px;
+      margin-bottom: 30px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+    
+    .experts-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+      margin-top: 20px;
+    }
+    
+    .expert-card {
+      background: #e8f5e9;
+      border-radius: 10px;
+      padding: 20px;
+      text-align: center;
+      transition: transform 0.3s;
+    }
+    
+    .expert-card:hover {
+      transform: translateY(-5px);
+    }
+    
+    .expert-img {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 15px;
+      border: 3px solid #4caf50;
+    }
+    
+    .expert-name {
+      font-size: 18px;
+      font-weight: 600;
+      color: #2e7d32;
+      margin-bottom: 5px;
+    }
+    
+    .expert-specialty {
+      color: #666;
+      margin-bottom: 15px;
+    }
+    
+    .expert-contact-btn {
+      padding: 8px 15px;
+      background: #4caf50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    
+    .expert-contact-btn:hover {
+      background: #388e3c;
+    }
+    
+    /* Contact form modal */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .modal-content {
+      background: white;
+      border-radius: 10px;
+      padding: 25px;
+      width: 90%;
+      max-width: 500px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+    
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    
+    .close-btn {
+      background: none;
+      border: none;
+      font-size: 24px;
+      cursor: pointer;
+      color: #666;
+    }
+    
+    /* Success message */
+    .success-message {
+      text-align: center;
+      padding: 20px;
+      background: #e8f5e9;
+      color: #2e7d32;
+      border-radius: 8px;
+      margin: 20px 0;
+      display: none;
+    }
+    
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .experts-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .star {
+        font-size: 28px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="logo">SmartAgri</div>
+      <div class="nav-buttons">
+        <button class="icon-btn" onclick="goHome()">🏠</button>
+        <button class="icon-btn" onclick="changeLanguage()">🌐</button>
+      </div>
+    </header>
+
+    <h1>Feedback & Contact Experts</h1>
+    <p class="subtitle">Share your experience and connect with agricultural experts</p>
+
+    <!-- Feedback Section -->
+    <div class="feedback-section">
+      <h2 class="section-title">Rate Your Experience</h2>
+      
+      <form id="feedbackForm">
+        <div class="form-group">
+          <label for="userName">Your Name</label>
+          <input type="text" id="userName" placeholder="Enter your name">
+        </div>
+        
+        <div class="form-group">
+          <label for="userEmail">Email Address</label>
+          <input type="email" id="userEmail" placeholder="Enter your email">
+        </div>
+        
+        <div class="form-group">
+          <label>How would you rate your experience with SmartAgri?</label>
+          <div class="star-rating">
+            <span class="star" data-value="1">★</span>
+            <span class="star" data-value="2">★</span>
+            <span class="star" data-value="3">★</span>
+            <span class="star" data-value="4">★</span>
+            <span class="star" data-value="5">★</span>
+          </div>
+          <div class="rating-text" id="ratingText">Please select a rating</div>
+          <input type="hidden" id="ratingValue" value="0">
+        </div>
+        
+        <div class="form-group">
+          <label for="feedbackCategory">Feedback Category</label>
+          <select id="feedbackCategory">
+            <option value="">Select a category</option>
+            <option value="general">General Feedback</option>
+            <option value="technical">Technical Issue</option>
+            <option value="suggestion">Feature Suggestion</option>
+            <option value="content">Content Feedback</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label for="feedbackMessage">Your Feedback</label>
+          <textarea id="feedbackMessage" rows="5" placeholder="Please share your thoughts, suggestions, or issues..."></textarea>
+        </div>
+        
+        <button type="submit" class="submit-btn">
+          <i class="fas fa-paper-plane"></i> Submit Feedback
+        </button>
+      </form>
+      
+      <div class="success-message" id="feedbackSuccess">
+        <i class="fas fa-check-circle"></i>
+        <p>Thank you for your feedback! We appreciate your input.</p>
+      </div>
+    </div>
+
+    <!-- Contact Experts Section -->
+    <div class="contact-section">
+      <h2 class="section-title">Connect with Agricultural Experts</h2>
+      <p style="text-align: center; margin-bottom: 20px;">Get personalized advice from our network of agricultural experts</p>
+      
+      <div class="experts-grid">
+        <div class="expert-card">
+          <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&q=80" alt="Dr. Sharma" class="expert-img">
+          <h3 class="expert-name">Dr. Rajesh Sharma</h3>
+          <p class="expert-specialty">Crop Disease Specialist</p>
+          <p class="expert-specialty">15+ years experience</p>
+          <button class="expert-contact-btn" onclick="openContactModal('Dr. Rajesh Sharma')">Contact Expert</button>
+        </div>
+        
+        <div class="expert-card">
+          <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&q=80" alt="Dr. Patel" class="expert-img">
+          <h3 class="expert-name">Dr. Priya Patel</h3>
+          <p class="expert-specialty">Soil Science Expert</p>
+          <p class="expert-specialty">12+ years experience</p>
+          <button class="expert-contact-btn" onclick="openContactModal('Dr. Priya Patel')">Contact Expert</button>
+        </div>
+        
+        <div class="expert-card">
+          <img src="https://images.unsplash.com/photo-1566554273541-37a9ca77b91f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&q=80" alt="Mr. Singh" class="expert-img">
+          <h3 class="expert-name">Mr. Vikram Singh</h3>
+          <p class="expert-specialty">Organic Farming Specialist</p>
+          <p class="expert-specialty">10+ years experience</p>
+          <button class="expert-contact-btn" onclick="openContactModal('Mr. Vikram Singh')">Contact Expert</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Contact Modal -->
+  <div class="modal" id="contactModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 id="modalTitle">Contact Expert</h2>
+        <button class="close-btn" onclick="closeModal()">&times;</button>
+      </div>
+      
+      <form id="contactForm">
+        <input type="hidden" id="expertName">
+        
+        <div class="form-group">
+          <label for="contactName">Your Name</label>
+          <input type="text" id="contactName" required placeholder="Enter your name">
+        </div>
+        
+        <div class="form-group">
+          <label for="contactEmail">Email Address</label>
+          <input type="email" id="contactEmail" required placeholder="Enter your email">
+        </div>
+        
+        <div class="form-group">
+          <label for="contactPhone">Phone Number (optional)</label>
+          <input type="tel" id="contactPhone" placeholder="Enter your phone number">
+        </div>
+        
+        <div class="form-group">
+          <label for="queryCategory">Query Category</label>
+          <select id="queryCategory" required>
+            <option value="">Select a category</option>
+            <option value="crop">Crop Related</option>
+            <option value="soil">Soil Health</option>
+            <option value="pest">Pest Control</option>
+            <option value="irrigation">Irrigation</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label for="contactMessage">Your Question or Message</label>
+          <textarea id="contactMessage" rows="4" required placeholder="Please describe your question or issue..."></textarea>
+        </div>
+        
+        <button type="submit" class="submit-btn">
+          <i class="fas fa-paper-plane"></i> Send Message
+        </button>
+      </form>
+      
+      <div class="success-message" id="contactSuccess">
+        <i class="fas fa-check-circle"></i>
+        <p>Your message has been sent! The expert will contact you shortly.</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let currentRating = 0;
+    
+    function goHome() {
+      window.location.href = 'home.html';
+    }
+    
+    function changeLanguage() {
+      alert('Language change functionality would go here');
+    }
+    
+    // Star rating functionality
+    document.querySelectorAll('.star').forEach(star => {
+      star.addEventListener('click', function() {
+        const value = parseInt(this.getAttribute('data-value'));
+        currentRating = value;
+        document.getElementById('ratingValue').value = value;
+        
+        // Update stars display
+        document.querySelectorAll('.star').forEach(s => {
+          const starValue = parseInt(s.getAttribute('data-value'));
+          if (starValue <= value) {
+            s.classList.add('active');
+          } else {
+            s.classList.remove('active');
+          }
+        });
+        
+        // Update rating text
+        const ratingText = document.getElementById('ratingText');
+        switch(value) {
+          case 1:
+            ratingText.textContent = 'Poor';
+            break;
+          case 2:
+            ratingText.textContent = 'Fair';
+            break;
+          case 3:
+            ratingText.textContent = 'Good';
+            break;
+          case 4:
+            ratingText.textContent = 'Very Good';
+            break;
+          case 5:
+            ratingText.textContent = 'Excellent';
+            break;
+          default:
+            ratingText.textContent = 'Please select a rating';
+        }
+      });
+    });
+    
+    // Feedback form submission
+    document.getElementById('feedbackForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      // Basic validation
+      const rating = document.getElementById('ratingValue').value;
+      if (rating === '0') {
+        alert('Please select a rating');
+        return;
+      }
+      
+      // In a real application, you would send this data to your server
+      // For this example, we'll just show a success message
+      
+      // Show success message
+      document.getElementById('feedbackSuccess').style.display = 'block';
+      
+      // Reset form after a delay
+      setTimeout(() => {
+        this.reset();
+        document.querySelectorAll('.star').forEach(star => {
+          star.classList.remove('active');
+        });
+        document.getElementById('ratingText').textContent = 'Please select a rating';
+        document.getElementById('ratingValue').value = '0';
+        currentRating = 0;
+        
+        // Hide success message after a while
+        setTimeout(() => {
+          document.getElementById('feedbackSuccess').style.display = 'none';
+        }, 5000);
+      }, 1000);
+    });
+    
+    // Contact expert modal
+    function openContactModal(expertName) {
+      document.getElementById('expertName').value = expertName;
+      document.getElementById('modalTitle').textContent = `Contact ${expertName}`;
+      document.getElementById('contactModal').style.display = 'flex';
+    }
+    
+    function closeModal() {
+      document.getElementById('contactModal').style.display = 'none';
+      document.getElementById('contactForm').reset();
+      document.getElementById('contactSuccess').style.display = 'none';
+    }
+    
+    // Contact form submission
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      // In a real application, you would send this data to your server
+      // For this example, we'll just show a success message
+      
+      // Show success message
+      document.getElementById('contactSuccess').style.display = 'block';
+      
+      // Reset form after a delay
+      setTimeout(() => {
+        this.reset();
+        
+        // Hide success message and close modal after a while
+        setTimeout(() => {
+          document.getElementById('contactSuccess').style.display = 'none';
+          closeModal();
+        }, 3000);
+      }, 1000);
+    });
+    
+    // Close modal when clicking outside
+    window.addEventListener('click', function(e) {
+      if (e.target === document.getElementById('contactModal')) {
+        closeModal();
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Crop Diagnosis</title>
+</head>
+<body>
+  <div class="container">
+    <h2>Crop Disease Diagnosis</h2>
+
+    <label for="stage">Select Stage:</label>
+    <select id="stage">
+      <option value="">--Select Stage--</option>
+      <option value="seedling">Seedling</option>
+      <option value="vegetative">Vegetative</option>
+      <option value="flowering">Flowering</option>
+      <option value="harvest">Harvest</option>
+    </select>
+
+    <label for="symptom">Select Symptom:</label>
+    <select id="symptom">
+      <option value="">--Select Symptom--</option>
+      <option value="yellow-leaves">Yellowing Leaves</option>
+      <option value="spots">Black streaks / lesions on leaves</option>
+      <option value="wilting">Small yellow-brown streaks on leaves</option>
+      <option value="stunted">Stunted Growth</option>
+    </select>
+
+    <button onclick="submitForm()">Submit</button>
+  </div>
+
+  <script>
+    function submitForm() {
+      let stage = document.getElementById("stage").value;
+      let symptom = document.getElementById("symptom").value;
+
+      if(stage && symptom) {
+        // Redirect to result page with selected options in URL
+        window.location.href = result.html?stage=${stage}&symptom=${symptom};
+      } else {
+        alert("Please select both stage and symptom");
+      }
+    }
+  </script>
+</body>
+</html>

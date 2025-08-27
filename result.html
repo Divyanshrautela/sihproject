@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Crop Diagnosis Result</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg">
+  <header class="topbar">
+    <div class="logo small">SmartAgri</div>
+    <div class="top-actions">
+      <button class="icon-btn" onclick="goHome()">🏠</button>
+    </div>
+  </header>
+
+  <div class="result-container">
+    <h1 class="big">Diagnosis Result</h1>
+    
+    <div id="diagnosisResult">
+      <p>Select a crop, stage, and symptom to see diagnosis results.</p>
+    </div>
+    
+    <button onclick="window.history.back()" class="primary-large">Back to Diagnosis</button>
+  </div>
+
+  <div id="leafContainer" aria-hidden="true"></div>
+
+  <script>
+    // Parse URL parameters
+    const urlParams = new URLSearchParams(window.location.search);
+    const crop = urlParams.get('crop');
+    const stage = urlParams.get('stage');
+    const symptom = urlParams.get('symptom');
+    
+    // Display results based on parameters
+    const resultDiv = document.getElementById('diagnosisResult');
+    
+    if (crop && stage && symptom) {
+      // This would be replaced with actual diagnosis data
+      resultDiv.innerHTML = `
+        <div class="disease-card">
+          <h2 class="disease-name">Possible Disease: ${crop} Disease</h2>
+          <p><strong>Crop:</strong> ${crop}</p>
+          <p><strong>Growth Stage:</strong> ${stage}</p>
+          <p><strong>Symptom:</strong> ${symptom}</p>
+          
+          <h3>Recommended Treatment:</h3>
+          <ul class="treatment-list">
+            <li>Remove affected plants to prevent spread</li>
+            <li>Apply appropriate fungicide/pesticide</li>
+            <li>Improve soil drainage and aeration</li>
+            <li>Maintain proper plant spacing</li>
+            <li>Consult local agricultural extension for specific recommendations</li>
+          </ul>
+          
+          <p class="note">Note: This is a general recommendation. For accurate diagnosis and treatment, consult with an agricultural expert.</p>
+        </div>
+      `;
+    } else {
+      resultDiv.innerHTML = '<p>Invalid parameters. Please go back and select both stage and symptom.</p>';
+    }
+    
+    function goHome() {
+      window.location.href = 'home.html';
+    }
+  </script>
+  
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Crop Remedies - SmartAgri</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg">
+  <header class="topbar">
+    <div class="logo small">SmartAgri</div>
+    <div class="top-actions">
+      <button class="icon-btn" onclick="goHome()">🏠</button>
+    </div>
+  </header>
+
+  <div class="center-card" style="max-width:800px;">
+    <h1 class="big">Crop Disease Remedies</h1>
+    <p class="subtitle">Common solutions for agricultural problems</p>
+
+    <div class="disease-card">
+      <h2 class="disease-name">Fungal Diseases</h2>
+      <ul class="treatment-list">
+        <li>Remove and destroy infected plant parts</li>
+        <li>Apply appropriate fungicide (e.g., copper-based, sulfur-based)</li>
+        <li>Improve air circulation around plants</li>
+        <li>Avoid overhead watering to reduce leaf wetness</li>
+        <li>Practice crop rotation to prevent soil-borne diseases</li>
+      </ul>
+    </div>
+
+    <div class="disease-card">
+      <h2 class="disease-name">Bacterial Diseases</h2>
+      <ul class="treatment-list">
+        <li>Use disease-free seeds and planting material</li>
+        <li>Apply copper-based bactericides</li>
+        <li>Remove and destroy severely infected plants</li>
+        <li>Disinfect tools between plants to prevent spread</li>
+        <li>Avoid working with plants when they are wet</li>
+      </ul>
+    </div>
+
+    <div class="disease-card">
+      <h2 class="disease-name">Viral Diseases</h2>
+      <ul class="treatment-list">
+        <li>Remove and destroy infected plants</li>
+        <li>Control insect vectors (aphids, whiteflies, etc.)</li>
+        <li>Use virus-resistant varieties when available</li>
+        <li>Practice good weed control (many viruses overwinter in weeds)</li>
+        <li>Disinfect tools regularly</li>
+      </ul>
+    </div>
+
+    <div class="disease-card">
+      <h2 class="disease-name">Nutrient Deficiencies</h2>
+      <ul class="treatment-list">
+        <li>Conduct soil test to identify specific deficiencies</li>
+        <li>Apply balanced fertilizer based on soil test results</li>
+        <li>Use organic matter to improve soil health</li>
+        <li>Consider foliar feeding for quick nutrient uptake</li>
+        <li>Maintain proper soil pH for optimal nutrient availability</li>
+      </ul>
+    </div>
+
+    <p class="note">For specific recommendations for your crops, use our diagnosis tool or consult with local agricultural experts.</p>
+    
+    <a href="crops.html" class="primary-large" style="display:block;text-align:center;text-decoration:none;margin-top:20px;">
+      Go to Crop Diagnosis
+    </a>
+  </div>
+
+  <div id="leafContainer" aria-hidden="true"></div>
+
+  <script>
+    function goHome() {
+      window.location.href = 'home.html';
+    }
+  </script>
+  
+  <script src="script.js"></script>
+</body>
+</html>

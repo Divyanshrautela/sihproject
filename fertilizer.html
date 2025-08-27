@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fertilizer Guidance - SmartAgri</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #2e382e;
+      line-height: 1.6;
+      background: linear-gradient(to bottom, #e8f5e9, #a5d6a7);
+      min-height: 100vh;
+      padding: 20px;
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 20px;
+      background-color: rgba(255, 255, 255, 0.9);
+      border-radius: 10px;
+      margin-bottom: 30px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+    
+    .logo {
+      font-size: 24px;
+      font-weight: 700;
+      color: #2e7d32;
+    }
+    
+    .nav-buttons {
+      display: flex;
+      gap: 10px;
+    }
+    
+    .icon-btn {
+      background: rgba(46, 125, 50, 0.1);
+      border: none;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      font-size: 18px;
+      cursor: pointer;
+      color: #2e7d32;
+      transition: all 0.3s;
+    }
+    
+    .icon-btn:hover {
+      background: rgba(46, 125, 50, 0.2);
+      transform: scale(1.05);
+    }
+    
+    h1 {
+      text-align: center;
+      margin-bottom: 10px;
+      color: #1b5e20;
+    }
+    
+    .subtitle {
+      text-align: center;
+      margin-bottom: 40px;
+      color: #388e3c;
+    }
+    
+    /* Form styles */
+    .guidance-form {
+      background: white;
+      border-radius: 15px;
+      padding: 30px;
+      margin: 30px auto;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      max-width: 600px;
+    }
+    
+    .form-title {
+      text-align: center;
+      margin-bottom: 25px;
+      color: #2e7d32;
+    }
+    
+    .form-group {
+      margin-bottom: 20px;
+    }
+    
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: #2e7d32;
+    }
+    
+    .form-group select, .form-group input {
+      width: 100%;
+      padding: 12px 15px;
+      border: 2px solid #c8e6c9;
+      border-radius: 8px;
+      font-size: 16px;
+      background: white;
+    }
+    
+    .form-group select:focus, .form-group input:focus {
+      border-color: #4caf50;
+      outline: none;
+    }
+    
+    .submit-btn {
+      width: 100%;
+      padding: 15px;
+      background: #4caf50;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 18px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.3s;
+      margin-top: 20px;
+    }
+    
+    .submit-btn:hover {
+      background: #388e3c;
+    }
+    
+    /* Results section */
+    .results-container {
+      background: white;
+      border-radius: 15px;
+      padding: 30px;
+      margin: 30px auto;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      max-width: 800px;
+      display: none;
+    }
+    
+    .results-title {
+      color: #2e7d32;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    
+    .fertilizer-card {
+      background: #e8f5e9;
+      padding: 20px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+    }
+    
+    .fertilizer-card h3 {
+      color: #2e7d32;
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+    }
+    
+    .fertilizer-card h3 i {
+      margin-right: 10px;
+    }
+    
+    .recommendation-list {
+      padding-left: 20px;
+    }
+    
+    .recommendation-list li {
+      margin-bottom: 10px;
+    }
+    
+    .note {
+      background: #fff8e1;
+      border-left: 4px solid #ffc107;
+      padding: 15px;
+      margin: 20px 0;
+      border-radius: 4px;
+      font-size: 14px;
+    }
+    
+    .back-btn {
+      padding: 12px 25px;
+      background: #4caf50;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background 0.3s;
+      display: block;
+      margin: 20px auto 0;
+      text-align: center;
+    }
+    
+    .back-btn:hover {
+      background: #388e3c;
+    }
+    
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .guidance-form, .results-container {
+        margin: 20px;
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="logo">SmartAgri</div>
+      <div class="nav-buttons">
+        <button class="icon-btn" onclick="goHome()">🏠</button>
+        <button class="icon-btn" onclick="changeLanguage()">🌐</button>
+      </div>
+    </header>
+
+    <h1>Fertilizer Guidance</h1>
+    <p class="subtitle">Get customized fertilizer and pesticide recommendations for your crops</p>
+
+    <div class="guidance-form">
+      <h2 class="form-title">Crop & Land Information</h2>
+      
+      <div class="form-group">
+        <label for="cropType">Select Crop Type</label>
+        <select id="cropType">
+          <option value="">-- Select Crop --</option>
+          <option value="rice">Rice</option>
+          <option value="wheat">Wheat</option>
+          <option value="maize">Maize</option>
+          <option value="potato">Potato</option>
+          <option value="tomato">Tomato</option>
+          <option value="cotton">Cotton</option>
+          <option value="sugarcane">Sugarcane</option>
+          <option value="pulses">Pulses</option>
+          <option value="vegetables">Vegetables</option>
+          <option value="fruits">Fruits</option>
+        </select>
+      </div>
+      
+      <div class="form-group">
+        <label for="landArea">Land Area (in acres)</label>
+        <input type="number" id="landArea" min="0.1" step="0.1" placeholder="Enter land area">
+      </div>
+      
+      <div class="form-group">
+        <label for="soilType">Soil Type (optional)</label>
+        <select id="soilType">
+          <option value="">-- Select Soil Type --</option>
+          <option value="loamy">Loamy</option>
+          <option value="clay">Clay</option>
+          <option value="sandy">Sandy</option>
+          <option value="silt">Silt</option>
+          <option value="peat">Peat</option>
+          <option value="chalky">Chalky</option>
+        </select>
+      </div>
+      
+      <button class="submit-btn" onclick="calculateRecommendations()">
+        <i class="fas fa-calculator"></i> Calculate Recommendations
+      </button>
+    </div>
+
+    <div class="results-container" id="resultsContainer">
+      <h2 class="results-title">Fertilizer & Pesticide Recommendations</h2>
+      
+      <div class="fertilizer-card">
+        <h3><i class="fas fa-seedling"></i> Fertilizer Requirements</h3>
+        <div id="fertilizerRecommendations">
+          <!-- Fertilizer recommendations will be inserted here -->
+        </div>
+      </div>
+      
+      <div class="fertilizer-card">
+        <h3><i class="fas fa-spray-can"></i> Pesticide Requirements</h3>
+        <div id="pesticideRecommendations">
+          <!-- Pesticide recommendations will be inserted here -->
+        </div>
+      </div>
+      
+      <div class="note">
+        <i class="fas fa-info-circle"></i>
+        <strong>Note:</strong> These are general recommendations. For precise guidance, consider soil testing and consult with local agricultural experts. Always follow manufacturer instructions when applying fertilizers and pesticides.
+      </div>
+      
+      <button class="back-btn" onclick="resetForm()">
+        <i class="fas fa-redo"></i> Start Over
+      </button>
+    </div>
+  </div>
+
+  <script>
+    // Crop data with fertilizer and pesticide requirements
+    const cropData = {
+      rice: {
+        name: "Rice",
+        fertilizer: {
+          nitrogen: { amount: 80, unit: "kg/acre" },
+          phosphorus: { amount: 40, unit: "kg/acre" },
+          potassium: { amount: 40, unit: "kg/acre" },
+          organic: { amount: 5, unit: "tons/acre" },
+          timing: "Apply 50% N and full P & K as basal dose, remaining N in two splits during tillering and panicle initiation"
+        },
+        pesticide: {
+          common: ["Carbofuran", "Chlorpyriphos", "Benthiocarb"],
+          amount: "2-3 kg/acre",
+          timing: "Apply at time of sowing or transplanting for root protection",
+          notes: "For leaf folder and stem borer control, use specific insecticides as needed"
+        }
+      },
+      wheat: {
+        name: "Wheat",
+        fertilizer: {
+          nitrogen: { amount: 60, unit: "kg/acre" },
+          phosphorus: { amount: 30, unit: "kg/acre" },
+          potassium: { amount: 20, unit: "kg/acre" },
+          organic: { amount: 4, unit: "tons/acre" },
+          timing: "Apply full P & K and 1/3 N at sowing, remaining N in two splits at first irrigation and flowering"
+        },
+        pesticide: {
+          common: ["Chlorpyriphos", "Malathion", "Endosulfan"],
+          amount: "1.5-2 kg/acre",
+          timing: "Apply as seed treatment or during early growth stages",
+          notes: "For aphid control, use systemic insecticides during tillering stage"
+        }
+      },
+      maize: {
+        name: "Maize",
+        fertilizer: {
+          nitrogen: { amount: 100, unit: "kg/acre" },
+          phosphorus: { amount: 50, unit: "kg/acre" },
+          potassium: { amount: 40, unit: "kg/acre" },
+          organic: { amount: 6, unit: "tons/acre" },
+          timing: "Apply full P & K and 1/3 N at sowing, remaining N in two splits at knee-high stage and tasseling"
+        },
+        pesticide: {
+          common: ["Atrazine", "Metolachlor", "Carbaryl"],
+          amount: "2-2.5 kg/acre",
+          timing: "Apply pre-emergence herbicides and insecticides as needed",
+          notes: "For stem borer control, apply granular insecticides in leaf whorls"
+        }
+      },
+      potato: {
+        name: "Potato",
+        fertilizer: {
+          nitrogen: { amount: 70, unit: "kg/acre" },
+          phosphorus: { amount: 60, unit: "kg/acre" },
+          potassium: { amount: 80, unit: "kg/acre" },
+          organic: { amount: 8, unit: "tons/acre" },
+          timing: "Apply full P & K and 1/2 N at planting, remaining N at tuber initiation stage"
+        },
+        pesticide: {
+          common: ["Chlorothalonil", "Mancozeb", "Imidacloprid"],
+          amount: "1.5-2 kg/acre",
+          timing: "Apply fungicides at planting and insecticides during growth as needed",
+          notes: "For late blight control, apply fungicides preventatively during humid conditions"
+        }
+      },
+      tomato: {
+        name: "Tomato",
+        fertilizer: {
+          nitrogen: { amount: 50, unit: "kg/acre" },
+          phosphorus: { amount: 40, unit: "kg/acre" },
+          potassium: { amount: 60, unit: "kg/acre" },
+          organic: { amount: 10, unit: "tons/acre" },
+          timing: "Apply full P & K and 1/3 N at transplanting, remaining N in two splits during flowering and fruit development"
+        },
+        pesticide: {
+          common: ["Carbendazim", "Indoxacarb", "Spinosad"],
+          amount: "1-1.5 kg/acre",
+          timing: "Apply fungicides during flowering and insecticides as needed for pest control",
+          notes: "For fruit borer control, apply specific insecticides during fruit development stage"
+        }
+      },
+      cotton: {
+        name: "Cotton",
+        fertilizer: {
+          nitrogen: { amount: 120, unit: "kg/acre" },
+          phosphorus: { amount: 60, unit: "kg/acre" },
+          potassium: { amount: 60, unit: "kg/acre" },
+          organic: { amount: 5, unit: "tons/acre" },
+          timing: "Apply full P & K and 1/3 N at sowing, remaining N in two splits at square formation and flowering"
+        },
+        pesticide: {
+          common: ["Acephate", "Monocrotophos", "Pyrethroids"],
+          amount: "2-3 kg/acre",
+          timing: "Apply insecticides during early growth stages for sucking pests and during boll formation for bollworms",
+          notes: "Rotate insecticides to prevent resistance development in pests"
+        }
+      },
+      sugarcane: {
+        name: "Sugarcane",
+        fertilizer: {
+          nitrogen: { amount: 150, unit: "kg/acre" },
+          phosphorus: { amount: 70, unit: "kg/acre" },
+          potassium: { amount: 80, unit: "kg/acre" },
+          organic: { amount: 10, unit: "tons/acre" },
+          timing: "Apply full P & K and 1/3 N at planting, remaining N in two splits at tillering and grand growth stage"
+        },
+        pesticide: {
+          common: ["Chlorantraniliprole", "Fipronil", "Imidacloprid"],
+          amount: "3-4 kg/acre",
+          timing: "Apply at planting for termite control and during growth for borers",
+          notes: "For early shoot borer, apply granular insecticides in leaf whorls"
+        }
+      },
+      pulses: {
+        name: "Pulses",
+        fertilizer: {
+          nitrogen: { amount: 20, unit: "kg/acre" },
+          phosphorus: { amount: 50, unit: "kg/acre" },
+          potassium: { amount: 20, unit: "kg/acre" },
+          organic: { amount: 4, unit: "tons/acre" },
+          timing: "Apply full dose at sowing time as pulses are generally grown with minimal fertilization"
+        },
+        pesticide: {
+          common: ["Neem-based products", "Carbendazim", "Dimethoate"],
+          amount: "1-1.5 kg/acre",
+          timing: "Apply as seed treatment and during flowering if pest pressure is high",
+          notes: "Use bio-pesticides where possible to preserve beneficial insects"
+        }
+      },
+      vegetables: {
+        name: "Vegetables",
+        fertilizer: {
+          nitrogen: { amount: 40, unit: "kg/acre" },
+          phosphorus: { amount: 30, unit: "kg/acre" },
+          potassium: { amount: 40, unit: "kg/acre" },
+          organic: { amount: 12, unit: "tons/acre" },
+          timing: "Apply full P & K and 1/3 N at transplanting, remaining N in 2-3 splits during growth"
+        },
+        pesticide: {
+          common: ["Neem oil", "Spinosad", "Bacillus thuringiensis"],
+          amount: "As per product recommendation",
+          timing: "Apply preventatively and at first sign of pests",
+          notes: "For leafy vegetables, observe pre-harvest intervals carefully"
+        }
+      },
+      fruits: {
+        name: "Fruits",
+        fertilizer: {
+          nitrogen: { amount: 60, unit: "kg/acre" },
+          phosphorus: { amount: 40, unit: "kg/acre" },
+          potassium: { amount: 60, unit: "kg/acre" },
+          organic: { amount: 15, unit: "tons/acre" },
+          timing: "Apply in split doses during dormancy, flowering and fruit development stages"
+        },
+        pesticide: {
+          common: ["Horticultural oils", "Copper fungicides", "Systemic insecticides"],
+          amount: "As per product recommendation",
+          timing: "Apply during dormancy for overwintering pests and as needed during growth",
+          notes: "Follow pre-harvest intervals carefully for fruit crops"
+        }
+      }
+    };
+
+    function goHome() {
+      alert("Navigate to home dashboard");
+    }
+
+    function changeLanguage() {
+      alert("Language change functionality would go here");
+    }
+
+    function calculateRecommendations() {
+      const cropType = document.getElementById("cropType").value;
+      const landArea = parseFloat(document.getElementById("landArea").value);
+      const soilType = document.getElementById("soilType").value;
+      
+      if (!cropType || !landArea || landArea <= 0) {
+        alert("Please select a crop and enter a valid land area");
+        return;
+      }
+      
+      const crop = cropData[cropType];
+      if (!crop) {
+        alert("Invalid crop selection");
+        return;
+      }
+      
+      // Calculate fertilizer requirements based on land area
+      const fertilizerRec = document.getElementById("fertilizerRecommendations");
+      fertilizerRec.innerHTML = `
+        <p><strong>For ${landArea} acres of ${crop.name}:</strong></p>
+        <ul class="recommendation-list">
+          <li><strong>Nitrogen (N):</strong> ${(crop.fertilizer.nitrogen.amount * landArea).toFixed(1)} ${crop.fertilizer.nitrogen.unit}</li>
+          <li><strong>Phosphorus (P₂O₅):</strong> ${(crop.fertilizer.phosphorus.amount * landArea).toFixed(1)} ${crop.fertilizer.phosphorus.unit}</li>
+          <li><strong>Potassium (K₂O):</strong> ${(crop.fertilizer.potassium.amount * landArea).toFixed(1)} ${crop.fertilizer.potassium.unit}</li>
+          <li><strong>Organic Manure:</strong> ${(crop.fertilizer.organic.amount * landArea).toFixed(1)} ${crop.fertilizer.organic.unit}</li>
+        </ul>
+        <p><strong>Application Timing:</strong> ${crop.fertilizer.timing}</p>
+        ${soilType ? `<p><strong>Soil-specific note:</strong> For ${soilType} soil, consider adjusting micronutrient application based on soil test results.</p>` : ''}
+      `;
+      
+      // Calculate pesticide requirements
+      const pesticideRec = document.getElementById("pesticideRecommendations");
+      pesticideRec.innerHTML = `
+        <p><strong>For ${landArea} acres of ${crop.name}:</strong></p>
+        <p><strong>Common Pesticides:</strong> ${crop.pesticide.common.join(", ")}</p>
+        <p><strong>Recommended Amount:</strong> ${crop.pesticide.amount}</p>
+        <p><strong>Application Timing:</strong> ${crop.pesticide.timing}</p>
+        <p><strong>Additional Notes:</strong> ${crop.pesticide.notes}</p>
+      `;
+      
+      // Show results container
+      document.getElementById("resultsContainer").style.display = "block";
+      
+      // Scroll to results
+      document.getElementById("resultsContainer").scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function resetForm() {
+      document.getElementById("cropType").value = "";
+      document.getElementById("landArea").value = "";
+      document.getElementById("soilType").value = "";
+      document.getElementById("resultsContainer").style.display = "none";
+    }
+  </script>
+</body>
+</html>
